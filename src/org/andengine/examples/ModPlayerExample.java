@@ -1,5 +1,7 @@
 package org.andengine.examples;
 
+import java.io.IOException;
+
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
@@ -18,7 +20,7 @@ import org.andengine.ui.activity.SimpleBaseGameActivity;
 import org.andengine.util.FileUtils;
 import org.andengine.util.call.Callable;
 import org.andengine.util.call.Callback;
-import org.helllabs.android.xmp.ModPlayer;
+import org.andengine.extension.modplayer.ModPlayer;
 
 import android.widget.Toast;
 
@@ -141,7 +143,12 @@ public class ModPlayerExample extends SimpleBaseGameActivity {
 	// ===========================================================
 
 	private void startPlayingMod() {
-		this.mModPlayer.play(FileUtils.getAbsolutePathOnExternalStorage(this, SAMPLE_MOD_DIRECTORY + SAMPLE_MOD_FILENAME));
+		try {
+			this.mModPlayer.play(FileUtils.getAbsolutePathOnExternalStorage(this, SAMPLE_MOD_DIRECTORY + SAMPLE_MOD_FILENAME));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// ===========================================================
